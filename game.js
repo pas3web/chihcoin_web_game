@@ -59,7 +59,7 @@ function create() {
     });
 
     this.time.addEvent({
-        delay: 300,  // Интервал появления новых монет
+        delay: 500,  // Интервал появления новых монет
         callback: dropCoin,
         callbackScope: this,
         loop: true
@@ -82,9 +82,8 @@ function onEvent() {
 function dropCoin() {
     if (timeLeft > 0) {
         let x = Phaser.Math.Between(0, 800);
-        let y = 0;
+        let y = Phaser.Math.Between(-50, -10);  // Начальная позиция немного выше экрана
         let coin = coins.create(x, y, 'coin');
         coin.setScale(0.3);  // Уменьшаем размер монеты
         coin.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-    }
-}
+        coin.setVelocity(Phaser.Math.Between(-100, 100), 20
