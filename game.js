@@ -26,6 +26,7 @@ let timer;
 let timeLeft = 30;
 let timerText;
 let gameOver = false;
+let restartButton;
 
 function preload() {
     this.load.image('coin', 'assets/chihcoin.png');
@@ -96,8 +97,8 @@ function dropCoin() {
 function endGame() {
     this.add.rectangle(400, 300, 800, 600, 0x000000, 0.8);
     this.add.rectangle(400, 300, 400, 200, 0xffffff);
-    this.add.text(400, 280, `Woooow! Your score - ${score}! COOL!`, { fontSize: '32px', fill: '#000' }).setOrigin(0.5);
-    let restartButton = this.add.image(400, 350, 'restartButton').setInteractive();
+    this.add.text(400, 250, `Woooow! Your score - ${score}! COOL!`, { fontSize: '32px', fill: '#000' }).setOrigin(0.5);
+    restartButton = this.add.text(400, 350, 'Restart', { fontSize: '32px', fill: '#fff', backgroundColor: '#000' }).setOrigin(0.5).setInteractive();
     restartButton.on('pointerdown', () => {
         this.scene.restart();
         resetGame();
