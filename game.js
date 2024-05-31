@@ -1,7 +1,7 @@
 const config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: window.innerWidth,
+    height: window.innerHeight,
     parent: 'game-container',
     physics: {
         default: 'arcade',
@@ -9,6 +9,10 @@ const config = {
             gravity: { y: 300 },
             debug: false
         }
+    },
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH
     },
     scene: {
         preload: preload,
@@ -34,7 +38,7 @@ function preload() {
 }
 
 function create() {
-    this.add.image(400, 300, 'background');
+    this.add.image(this.scale.width / 2, this.scale.height / 2, 'background').setDisplaySize(this.scale.width, this.scale.height);
 
     coins = this.physics.add.group();
 
@@ -84,7 +88,7 @@ function onEvent() {
 
 function dropCoin() {
     if (timeLeft > 0) {
-        let x = Phaser.Math.Between(0, 800);
+        let x = Phaser.Math.Between(0, this.scale.width);
         let y = Phaser.Math.Between(-50, -10);  // Начальная позиция немного выше экрана
         let coin = coins.create(x, y, 'coin');
         coin.setScale(0.3);  // Уменьшаем размер монеты
@@ -95,11 +99,11 @@ function dropCoin() {
 
 function endGame() {
     // Полностью черный фон
-    let bg = this.add.rectangle(400, 300, 800, 600, 0x000000, 1.0);
+    let bg = this.add.rectangle(this.scale.width / 2, this.scale.height / 2, this.scale.width, this.scale.height, 0x000000, 1.0);
     bg.setOrigin(0.5, 0.5);
 
     // Текст с результатом
-    let resultText = this.add.text(400, 250, `Woooow!\nYour score - ${score}!\nCOOL!`, {
+    let resultText = this.add.text(this.scale.width / 2, this.scale.height / 2 - 50, `Woooow!\nYour score - ${score}!\nCOOL!`, {
         fontSize: '32px',
         fill: '#fff',
         align: 'center'
@@ -107,7 +111,7 @@ function endGame() {
     resultText.setOrigin(0.5);
 
     // Кнопка перезапуска
-    restartButton = this.add.text(400, 350, 'Restart', {
+    restartButton = this.add.text(this.scale.width / 2, this.scale.height / 2 + 50, 'Restart', {
         fontSize: '32px',
         fill: '#fff',
         align: 'center'
