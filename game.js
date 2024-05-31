@@ -103,7 +103,7 @@ function endGame() {
     // Текст с результатом
     this.add.text(400, 275, `Woooow!\nYour score - ${score}!\nCOOL!`, {
         fontSize: '32px',
-        fill: '#fff',
+        fill: '#000', // Изменен цвет текста на черный
         align: 'center',
         wordWrap: { width: 380 }
     }).setOrigin(0.5);
