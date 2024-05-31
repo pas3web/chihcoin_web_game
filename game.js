@@ -86,4 +86,6 @@ function dropCoin() {
         let coin = coins.create(x, y, 'coin');
         coin.setScale(0.3);  // Уменьшаем размер монеты
         coin.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-        coin.setVelocity(Phaser.Math.Between(-100, 100), 20
+        coin.setVelocity(Phaser.Math.Between(-100, 100), 200);  // Добавляем горизонтальное и вертикальное движение
+    }
+}
