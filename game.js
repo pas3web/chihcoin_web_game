@@ -31,7 +31,7 @@ let restartButton;
 function preload() {
     this.load.image('coin', 'assets/chihcoin.png');
     this.load.image('background', 'assets/background.png');
-    this.load.image('restartButton', 'assets/restart.png');  // Замените на путь к изображению кнопки перезапуска
+    // Убедитесь, что у вас есть изображение кнопки перезапуска, если требуется
 }
 
 function create() {
@@ -95,10 +95,29 @@ function dropCoin() {
 }
 
 function endGame() {
+    // Темный фон
     this.add.rectangle(400, 300, 800, 600, 0x000000, 0.8);
-    this.add.rectangle(400, 300, 400, 200, 0xffffff);
-    this.add.text(400, 250, `Woooow! Your score - ${score}! COOL!`, { fontSize: '32px', fill: '#000' }).setOrigin(0.5);
-    restartButton = this.add.text(400, 350, 'Restart', { fontSize: '32px', fill: '#fff', backgroundColor: '#000' }).setOrigin(0.5).setInteractive();
+
+    // Белая рамка
+    this.add.rectangle(400, 300, 400, 200, 0xffffff).setStrokeStyle(4, 0xffffff);
+
+    // Текст с результатом
+    this.add.text(400, 250, `Woooow!\nYour score - ${score}!\nCOOL!`, {
+        fontSize: '32px',
+        fill: '#fff',
+        align: 'center',
+        wordWrap: { width: 380 }
+    }).setOrigin(0.5);
+
+    // Кнопка перезапуска
+    restartButton = this.add.text(400, 350, 'Restart', {
+        fontSize: '32px',
+        fill: '#fff',
+        backgroundColor: '#000',
+        padding: { left: 20, right: 20, top: 10, bottom: 10 },
+        border: '2px solid #fff'
+    }).setOrigin(0.5).setInteractive();
+    
     restartButton.on('pointerdown', () => {
         this.scene.restart();
         resetGame();
