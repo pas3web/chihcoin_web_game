@@ -116,7 +116,8 @@ function endGame() {
         fontSize: '32px',
         fill: '#fff',
         backgroundColor: '#000',
-        padding: { left: 20, right: 20, top: 10, bottom: 10 }
+        padding: { left: 20, right: 20, top: 10, bottom: 10 },
+        border: '2px solid #fff'
     }).setOrigin(0.5).setInteractive();
     
     restartButton.on('pointerdown', () => {
