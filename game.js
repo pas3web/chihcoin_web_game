@@ -25,10 +25,12 @@ let scoreText;
 let timer;
 let timeLeft = 30;
 let timerText;
+let gameOver = false;
 
 function preload() {
     this.load.image('coin', 'assets/chihcoin.png');
     this.load.image('background', 'assets/background.png');
+    this.load.image('restartButton', 'assets/restart.png');  // Замените на путь к изображению кнопки перезапуска
 }
 
 function create() {
@@ -67,10 +69,11 @@ function create() {
 }
 
 function update() {
-    if (timeLeft <= 0) {
+    if (timeLeft <= 0 && !gameOver) {
         this.physics.pause();
         timer.remove(false);
-        scoreText.setText('Game Over! Final Score: ' + score);
+        endGame.call(this);
+        gameOver = true;
     }
 }
 
@@ -86,6 +89,23 @@ function dropCoin() {
         let coin = coins.create(x, y, 'coin');
         coin.setScale(0.3);  // Уменьшаем размер монеты
         coin.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-        coin.setVelocity(Phaser.Math.Between(-100, 100), 200);  // Добавляем горизонтальное и вертикальное движение
+        coin.setVelocity(0, 200);  // Убираем горизонтальное движение, оставляем только вертикальное
     }
+}
+
+function endGame() {
+    this.add.rectangle(400, 300, 800, 600, 0x000000, 0.8);
+    this.add.rectangle(400, 300, 400, 200, 0xffffff);
+    this.add.text(400, 280, `Woooow! Your score - ${score}! COOL!`, { fontSize: '32px', fill: '#000' }).setOrigin(0.5);
+    let restartButton = this.add.image(400, 350, 'restartButton').setInteractive();
+    restartButton.on('pointerdown', () => {
+        this.scene.restart();
+        resetGame();
+    });
+}
+
+function resetGame() {
+    score = 0;
+    timeLeft = 30;
+    gameOver = false;
 }
