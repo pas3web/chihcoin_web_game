@@ -31,7 +31,6 @@ let restartButton;
 function preload() {
     this.load.image('coin', 'assets/chihcoin.png');
     this.load.image('background', 'assets/background.png');
-    // Убедитесь, что у вас есть изображение кнопки перезапуска, если требуется
 }
 
 function create() {
@@ -95,8 +94,8 @@ function dropCoin() {
 }
 
 function endGame() {
-    // Темный фон
-    this.add.rectangle(400, 300, 800, 600, 0x000000, 0.8);
+    // Полностью черный фон
+    this.add.rectangle(400, 300, 800, 600, 0x000000, 1.0);
 
     // Белая рамка
     this.add.rectangle(400, 300, 400, 200, 0xffffff).setStrokeStyle(4, 0xffffff);
