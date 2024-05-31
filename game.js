@@ -97,28 +97,23 @@ function endGame() {
     // Полностью черный фон
     let bg = this.add.rectangle(400, 300, 800, 600, 0x000000, 1.0);
     bg.setOrigin(0.5, 0.5);
-    bg.depth = 1;
 
     // Текст с результатом
     let resultText = this.add.text(400, 250, `Woooow!\nYour score - ${score}!\nCOOL!`, {
         fontSize: '32px',
         fill: '#fff',
-        align: 'center',
-        wordWrap: { width: 380 }
+        align: 'center'
     });
     resultText.setOrigin(0.5);
-    resultText.depth = 2;
 
     // Кнопка перезапуска
     restartButton = this.add.text(400, 350, 'Restart', {
         fontSize: '32px',
         fill: '#fff',
-        backgroundColor: '#000',
         align: 'center'
     });
     restartButton.setOrigin(0.5);
     restartButton.setInteractive();
-    restartButton.depth = 2;
 
     restartButton.on('pointerdown', () => {
         this.scene.restart();
