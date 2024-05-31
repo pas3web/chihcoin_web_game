@@ -34,21 +34,10 @@ function preload() {
 function create() {
     this.add.image(400, 300, 'background');
 
-    coins = this.physics.add.group({
-        key: 'coin',
-        repeat: 11,
-        setXY: { x: 12, y: 0, stepX: 70 }
-    });
-
-    coins.children.iterate(function (child) {
-        child.setScale(0.3);  // Уменьшаем размер монеты
-        child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-    });
+    coins = this.physics.add.group();
 
     scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#00ff00' });
     timerText = this.add.text(16, 48, 'Time: 30s', { fontSize: '32px', fill: '#00ff00' });
-
-    this.physics.add.collider(coins, this.physics.world.bounds);
 
     this.input.on('pointerdown', function (pointer) {
         let x = pointer.x;
@@ -68,6 +57,13 @@ function create() {
         callbackScope: this,
         loop: true
     });
+
+    this.time.addEvent({
+        delay: 300,  // Интервал появления новых монет
+        callback: dropCoin,
+        callbackScope: this,
+        loop: true
+    });
 }
 
 function update() {
@@ -81,4 +77,14 @@ function update() {
 function onEvent() {
     timeLeft -= 1;
     timerText.setText('Time: ' + timeLeft + 's');
+}
+
+function dropCoin() {
+    if (timeLeft > 0) {
+        let x = Phaser.Math.Between(0, 800);
+        let y = 0;
+        let coin = coins.create(x, y, 'coin');
+        coin.setScale(0.3);  // Уменьшаем размер монеты
+        coin.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    }
 }
