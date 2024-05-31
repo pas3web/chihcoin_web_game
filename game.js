@@ -97,29 +97,21 @@ function endGame() {
     // Полностью черный фон
     this.add.rectangle(400, 300, 800, 600, 0x000000, 1.0);
 
-    // Белая рамка вокруг текста с результатом
-    this.add.rectangle(400, 275, 400, 100).setStrokeStyle(4, 0xffffff);
-
     // Текст с результатом
-    this.add.text(400, 275, `Woooow!\nYour score - ${score}!\nCOOL!`, {
+    this.add.text(400, 250, `Woooow!\nYour score - ${score}!\nCOOL!`, {
         fontSize: '32px',
-        fill: '#000', // Изменен цвет текста на черный
+        fill: '#fff',
         align: 'center',
         wordWrap: { width: 380 }
     }).setOrigin(0.5);
-
-    // Белая рамка вокруг кнопки перезапуска
-    this.add.rectangle(400, 350, 150, 50).setStrokeStyle(4, 0xffffff);
 
     // Кнопка перезапуска
     restartButton = this.add.text(400, 350, 'Restart', {
         fontSize: '32px',
         fill: '#fff',
-        backgroundColor: '#000',
-        padding: { left: 20, right: 20, top: 10, bottom: 10 },
-        border: '2px solid #fff'
+        align: 'center'
     }).setOrigin(0.5).setInteractive();
-    
+
     restartButton.on('pointerdown', () => {
         this.scene.restart();
         resetGame();
