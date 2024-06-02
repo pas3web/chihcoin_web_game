@@ -4,80 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chihcoin Game</title>
-    <style>
-        body { margin: 0; overflow: hidden; }
-        canvas { display: block; }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.min.js"></script>
+    <script src="game.js" defer></script>
 </head>
 <body>
-    <canvas id="gameCanvas"></canvas>
-    <script>
-        const canvas = document.getElementById('gameCanvas');
-        const context = canvas.getContext('2d');
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const coinImages = [
-            'assets/dog1.png',
-            'assets/dog2.png',
-            'assets/dog3.png',
-            'assets/dog4.png'
-        ];
-
-        const backgroundImage = new Image();
-        backgroundImage.src = 'assets/new_background.png'; // Замените на путь к вашему новому фону
-
-        class Coin {
-            constructor(x, y) {
-                this.x = x;
-                this.y = y;
-                this.image = new Image();
-                this.image.src = coinImages[Math.floor(Math.random() * coinImages.length)];
-                this.width = 30; // Ширина монетки
-                this.height = 30; // Высота монетки
-            }
-
-            draw() {
-                context.drawImage(this.image, this.x, this.y, this.width, this.height);
-            }
-
-            update() {
-                this.y += 2; // Скорость падения
-                if (this.y > canvas.height) {
-                    this.y = -this.height; // Сбрасываем монетку наверх
-                    this.x = Math.random() * canvas.width; // Новая случайная позиция по x
-                }
-            }
-        }
-
-        const coins = [];
-        for (let i = 0; i < 10; i++) { // Количество монеток
-            coins.push(new Coin(Math.random() * canvas.width, Math.random() * canvas.height));
-        }
-
-        function drawBackground() {
-            context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
-        }
-
-        function drawCoins() {
-            coins.forEach(coin => coin.draw());
-        }
-
-        function updateCoins() {
-            coins.forEach(coin => coin.update());
-        }
-
-        function gameLoop() {
-            context.clearRect(0, 0, canvas.width, canvas.height); // Очистка экрана
-            drawBackground(); // Рендеринг фона
-            drawCoins(); // Рендеринг монеток
-            updateCoins(); // Обновление монеток
-            requestAnimationFrame(gameLoop); // Запуск следующего кадра
-        }
-
-        // Запуск игрового цикла
-        gameLoop();
-    </script>
+    <div id="game-container"></div>
 </body>
 </html>
