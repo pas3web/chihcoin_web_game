@@ -91,8 +91,10 @@ function update() {
 }
 
 function onEvent() {
-    timeLeft -= 1;
-    timerText.setText('Time: ' + timeLeft + 's');
+    if (timeLeft > 0) {
+        timeLeft -= 1;
+        timerText.setText('Time: ' + timeLeft + 's');
+    }
 }
 
 function dropCoin() {
@@ -101,7 +103,6 @@ function dropCoin() {
         let y = Phaser.Math.Between(-50, -10);  // Начальная позиция немного выше экрана
         let coinImage = Phaser.Math.RND.pick(['dog1', 'dog2', 'dog3', 'dog4']); // Выбор случайного изображения
         let coin = coins.create(x, y, coinImage);
-        coin.setScale(0.3);  // Уменьшаем размер монеты
         coin.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
         coin.setVelocity(0, 200);  // Убираем горизонтальное движение, оставляем только вертикальное
     }
