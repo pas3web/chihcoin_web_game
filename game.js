@@ -94,6 +94,8 @@ function onEvent() {
     if (timeLeft > 0) {
         timeLeft -= 1;
         timerText.setText('Time: ' + timeLeft + 's');
+    } else if (timeLeft === 0) {
+        endGame.call(this);
     }
 }
 
