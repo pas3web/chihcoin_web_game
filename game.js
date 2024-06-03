@@ -131,10 +131,11 @@ function endGame() {
     restartButton.setOrigin(0.5);
     restartButton.setInteractive();
 
-    restartButton.on('pointerdown', function () {
+    restartButton.on('pointerdown', () => {
         console.log('Restart button clicked'); // Отладка
-        this.scene.start(this.scene.key);
-    }, this);
+        resetGame();
+        this.scene.restart();
+    });
 }
 
 function resetGame() {
@@ -144,7 +145,7 @@ function resetGame() {
 }
 
 function resize(gameSize) {
-    if (gameSize) {
+    if (gameSize.width !== this.scale.width || gameSize.height !== this.scale.height) {
         const width = gameSize.width;
         const height = gameSize.height;
         this.scale.resize(width, height);
