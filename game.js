@@ -94,8 +94,6 @@ function onEvent() {
     if (timeLeft > 0) {
         timeLeft -= 1;
         timerText.setText('Time: ' + timeLeft + 's');
-    } else if (timeLeft === 0) {
-        endGame.call(this);
     }
 }
 
@@ -135,8 +133,7 @@ function endGame() {
 
     restartButton.on('pointerdown', function () {
         console.log('Restart button clicked'); // Отладка
-        this.scene.restart();
-        resetGame();
+        this.scene.start(this.scene.key);
     }, this);
 }
 
@@ -147,8 +144,10 @@ function resetGame() {
 }
 
 function resize(gameSize) {
-    const width = gameSize.width;
-    const height = gameSize.height;
-    this.scale.resize(width, height);
-    this.cameras.resize(width, height);
+    if (gameSize) {
+        const width = gameSize.width;
+        const height = gameSize.height;
+        this.scale.resize(width, height);
+        this.cameras.resize(width, height);
+    }
 }
