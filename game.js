@@ -133,10 +133,10 @@ function endGame() {
     restartButton.setOrigin(0.5);
     restartButton.setInteractive();
 
-    restartButton.on('pointerdown', () => {
+    restartButton.on('pointerdown', function () {
         this.scene.restart();
         resetGame();
-    });
+    }, this);
 }
 
 function resetGame() {
