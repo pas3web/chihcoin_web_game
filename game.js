@@ -134,6 +134,7 @@ function endGame() {
     restartButton.setInteractive();
 
     restartButton.on('pointerdown', function () {
+        console.log('Restart button clicked'); // Отладка
         this.scene.restart();
         resetGame();
     }, this);
